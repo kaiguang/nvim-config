@@ -16,32 +16,45 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  { 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
   {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
+    'folke/which-key.nvim',
+    event = 'VeryLazy',
     init = function()
       vim.o.timeout = true
       vim.o.timeoutlen = 300
     end,
     opts = {},
   },
+  {
+    'nvim-treesitter/nvim-treesitter',
+    build = ':TSUpdate',
+    config = function () 
+      local configs = require("nvim-treesitter.configs")
+
+      configs.setup({
+          ensure_installed = { 'c', 'html', 'javascript', 'lua', 'markdown', 'typescript', 'vim', 'vimdoc', 'yaml' },
+          highlight = { enable = true },
+          indent = { enable = true },  
+        })
+    end
+  },
 })
 
 -- ## Colorscheme
 
-vim.cmd.colorscheme "catppuccin"
+vim.cmd.colorscheme 'catppuccin'
 
 -- ## Options
 
 vim.opt.backup = false            -- Creates a backup file
 vim.opt.breakindent = true        -- Every wrapped line will continue visually indented (same amount of space as the beginning of that line).
-vim.opt.clipboard = "unnamedplus" -- Allows neovim to access the system clipboard
+vim.opt.clipboard = 'unnamedplus' -- Allows neovim to access the system clipboard
 vim.opt.cursorline = true         -- Highlight the current line
 vim.opt.expandtab = true          -- Convert tabs to spaces
 vim.opt.ignorecase = true         -- Ignore case in search patterns
 vim.opt.linebreak = true          -- Companion to wrap, don't split words
-vim.opt.mouse = "a"               -- Allow the mouse to be used in neovim
+vim.opt.mouse = 'a'               -- Allow the mouse to be used in neovim
 vim.opt.number = true             -- Set numbered lines
 vim.opt.shiftwidth = 0            -- The number of spaces inserted for each indentation, when set to 0 it is the "tabstop" value
 vim.opt.showtabline = 2           -- Always show tabs
@@ -56,10 +69,10 @@ vim.opt.termguicolors = true      -- Set term GUI colors (most terminals support
 vim.opt.undofile = true           -- Enable persistent undo
 
 -- Spell checker
+vim.opt.spelllang = 'en_us,en_ca,cjk'
+vim.opt.spellcapcheck = ''
+vim.opt.spelloptions = 'camel'
 vim.opt.spell = true
-vim.opt.spelllang = "en_us,en_ca,cjk"
-vim.opt.spellcapcheck = ""
-vim.opt.spelloptions = "camel"
 
 -- Disable netrw to use nvim-tree
 -- vim.g.loaded_netrw = 1
@@ -67,20 +80,20 @@ vim.opt.spelloptions = "camel"
 
 -- git-blame
 vim.g.gitblame_enabled = 0                      -- Disable on start-up
-vim.g.gitblame_date_format = "%Y-%m-%d %X (%a)" -- Custom date format
+vim.g.gitblame_date_format = '%Y-%m-%d %X (%a)' -- Custom date format
 
 -- Add icons to the signcolumn
-vim.fn.sign_define("DiagnosticSignError",  { text = "",  texthl = "DiagnosticSignError",  numhl = "DiagnosticSignError" })
-vim.fn.sign_define("DiagnosticSignWarn",   { text = "",  texthl = "DiagnosticSignWarn",   numhl = "DiagnosticSignWarn"  })
-vim.fn.sign_define("DiagnosticSignHint",   { text = "",  texthl = "DiagnosticSignHint",   numhl = "DiagnosticSignHint"  })
-vim.fn.sign_define("DiagnosticSignInfo",   { text = "",  texthl = "DiagnosticSignInfo",   numhl = "DiagnosticSignInfo"  })
+vim.fn.sign_define('DiagnosticSignError',  { text = '',  texthl = 'DiagnosticSignError',  numhl = 'DiagnosticSignError' })
+vim.fn.sign_define('DiagnosticSignWarn',   { text = '',  texthl = 'DiagnosticSignWarn',   numhl = 'DiagnosticSignWarn'  })
+vim.fn.sign_define('DiagnosticSignHint',   { text = '',  texthl = 'DiagnosticSignHint',   numhl = 'DiagnosticSignHint'  })
+vim.fn.sign_define('DiagnosticSignInfo',   { text = '',  texthl = 'DiagnosticSignInfo',   numhl = 'DiagnosticSignInfo'  })
 
 -- Diagnostic config
 vim.diagnostic.config({
   virtual_text = false,
   float = {
-    border = "rounded",
-    source = "always",
+    border = 'rounded',
+    source = 'always',
   },
 })
 
@@ -175,9 +188,9 @@ end)
 -- require "user.comment"
 
 -- Set cursor to vertical when leaving vim
-vim.api.nvim_create_autocmd({"VimLeave"}, {
-  pattern = {"*"},
-  command = "set guicursor=a:ver100-blinkwait200-blinkon200-blinoff200",
+vim.api.nvim_create_autocmd({'VimLeave'}, {
+  pattern = {'*'},
+  command = 'set guicursor=a:ver100-blinkwait200-blinkon200-blinkoff200',
 })
 
 -- Highlight on yank
@@ -190,3 +203,4 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = highlight_group,
   pattern = '*',
 })
+
