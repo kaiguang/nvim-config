@@ -234,7 +234,7 @@ lint.linters_by_ft = {
   text = { 'cspell', },
   typescript = { 'cspell', },
 }
-vim.api.nvim_create_autocmd({ 'BufWritePost', }, {
+vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufWritePost', 'InsertLeave', }, {
   callback = function()
     lint.try_lint()
   end,
