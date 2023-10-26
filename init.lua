@@ -16,8 +16,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
-  -- Colorscheme
-  { "folke/tokyonight.nvim", lazy = false, priority = 1000, opts = {}, },
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -29,42 +28,40 @@ require('lazy').setup({
   },
 })
 
--- folke/tokyonight.nvim
-require("tokyonight").setup({ style = "night", })
-vim.cmd("colorscheme tokyonight")
+-- ## Colorscheme
 
+vim.cmd.colorscheme "catppuccin"
 
 -- ## Options
 
-vim.opt.backup = false            -- creates a backup file
+vim.opt.backup = false            -- Creates a backup file
 vim.opt.breakindent = true        -- Every wrapped line will continue visually indented (same amount of space as the beginning of that line).
-vim.opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
-vim.opt.cursorline = true         -- highlight the current line
-vim.opt.expandtab = true          -- convert tabs to spaces
-vim.opt.ignorecase = true         -- ignore case in search patterns
-vim.opt.linebreak = true          -- companion to wrap, don't split words
-vim.opt.mouse = "a"               -- allow the mouse to be used in neovim
-vim.opt.number = true             -- set numbered lines
-vim.opt.scrolloff = 0             -- minimal number of screen lines to keep above and below the cursor
-vim.opt.shiftwidth = 0            -- the number of spaces inserted for each indentation, when set to 0 it is the "tabstop" value
-vim.opt.showmode = true           -- We need to see things like NORMAL, INSERT
-vim.opt.showtabline = 2           -- always show tabs
-vim.opt.sidescrolloff = 0         -- minimal number of screen columns either side of cursor if wrap is `false`
-vim.opt.signcolumn = "yes"        -- Alaways show the signcolumn
-vim.opt.smartcase = true          -- smart case
-vim.opt.smartindent = true        -- make indenting smarter again
-vim.opt.softtabstop = -1          -- When "sts" is negative, the value of "shiftwidth" is used.
-vim.opt.splitbelow = true         -- force all horizontal splits to go below current window
-vim.opt.splitright = true         -- force all vertical splits to go to the right of current window
-vim.opt.swapfile = false          -- creates a swapfile
-vim.opt.tabstop = 2               -- insert 2 spaces for a tab
-vim.opt.termguicolors = true      -- set term gui colors (most terminals support this)
-vim.opt.undofile = true           -- enable persistent undo
-vim.opt.spell = true
-vim.opt.spelloptions = "camel"
-vim.opt.spelllang = "en_us,en_ca,cjk"
+vim.opt.clipboard = "unnamedplus" -- Allows neovim to access the system clipboard
+vim.opt.cursorline = true         -- Highlight the current line
+vim.opt.expandtab = true          -- Convert tabs to spaces
+vim.opt.ignorecase = true         -- Ignore case in search patterns
+vim.opt.linebreak = true          -- Companion to wrap, don't split words
+vim.opt.mouse = "a"               -- Allow the mouse to be used in neovim
+vim.opt.number = true             -- Set numbered lines
+vim.opt.shiftwidth = 0            -- The number of spaces inserted for each indentation, when set to 0 it is the "tabstop" value
+vim.opt.showtabline = 2           -- Always show tabs
+vim.opt.smartcase = true          -- Smart case
+vim.opt.smartindent = true        -- Make indenting smarter again
+vim.opt.softtabstop = -1          -- When "softtabstop" is negative, the value of "shiftwidth" is used.
+vim.opt.splitbelow = true         -- Force all horizontal splits to go below current window
+vim.opt.splitright = true         -- Force all vertical splits to go to the right of current window
+vim.opt.swapfile = false          -- Creates a swapfile
+vim.opt.tabstop = 2               -- Insert 2 spaces for a tab
+vim.opt.termguicolors = true      -- Set term GUI colors (most terminals support this)
+vim.opt.undofile = true           -- Enable persistent undo
 
--- Diable netrw to use nvim-tree
+-- Spell checker
+vim.opt.spell = true
+vim.opt.spelllang = "en_us,en_ca,cjk"
+vim.opt.spellcapcheck = ""
+vim.opt.spelloptions = "camel"
+
+-- Disable netrw to use nvim-tree
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
 
@@ -73,7 +70,7 @@ vim.g.gitblame_enabled = 0                      -- Disable on start-up
 vim.g.gitblame_date_format = "%Y-%m-%d %X (%a)" -- Custom date format
 
 -- Add icons to the signcolumn
-vim.fn.sign_define("DiagnosticSignError",  { text = "",  texthl = "DiagnosticSignError",  numhl = "DiagnosticSignError"  })
+vim.fn.sign_define("DiagnosticSignError",  { text = "",  texthl = "DiagnosticSignError",  numhl = "DiagnosticSignError" })
 vim.fn.sign_define("DiagnosticSignWarn",   { text = "",  texthl = "DiagnosticSignWarn",   numhl = "DiagnosticSignWarn"  })
 vim.fn.sign_define("DiagnosticSignHint",   { text = "",  texthl = "DiagnosticSignHint",   numhl = "DiagnosticSignHint"  })
 vim.fn.sign_define("DiagnosticSignInfo",   { text = "",  texthl = "DiagnosticSignInfo",   numhl = "DiagnosticSignInfo"  })
@@ -87,7 +84,7 @@ vim.diagnostic.config({
   },
 })
 
--- ## Keymaps
+-- ## Keymap
 
 -- Move cursor to other windows
 -- vim.keymap.set('',  '<C-h>',           '<C-w>h')
