@@ -29,18 +29,23 @@ require('lazy').setup({
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
+    dependencies = {
+      'JoosepAlviste/nvim-ts-context-commentstring',
+    },
     config = function () 
-      local configs = require("nvim-treesitter.configs")
+      local configs = require('nvim-treesitter.configs')
 
       configs.setup({
         ensure_installed = {
           'c',
+          'css',
           'html',
           'json',
           'javascript',
           'lua',
           'markdown',
           'query',
+          'tsx',
           'typescript',
           'vim',
           'vimdoc',
@@ -48,9 +53,13 @@ require('lazy').setup({
         },
         highlight = { enable = true },
         indent = { enable = true },  
+        -- JoosepAlviste/nvim-ts-context-commentstring
+        context_commentstring = { enable = true, enable_autocmd = false, },
       })
-    end
+    end,
   },
+  { 'numToStr/Comment.nvim', lazy = false, },
+  { 'mfussenegger/nvim-lint', },
 })
 
 -- ## Colorscheme
@@ -81,10 +90,10 @@ vim.opt.termguicolors = true      -- Set term GUI colors (most terminals support
 vim.opt.undofile = true           -- Enable persistent undo
 
 -- Spell checker
-vim.opt.spelllang = 'en_us,en_ca,cjk'
-vim.opt.spellcapcheck = ''
-vim.opt.spelloptions = 'camel'
-vim.opt.spell = true
+-- vim.opt.spelllang = 'en_us,en_ca,cjk'
+-- vim.opt.spellcapcheck = ''
+-- vim.opt.spelloptions = 'camel'
+-- vim.opt.spell = true
 
 -- Disable netrw to use nvim-tree
 -- vim.g.loaded_netrw = 1
@@ -216,3 +225,23 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
+-- nvim-lint
+local lint = require('lint')
+lint.linters_by_ft = {
+  gitcommit = { 'cspell', },
+  javascript = { 'cspell', },
+  markdown = { 'cspell', },
+  text = { 'cspell', },
+  typescript = { 'cspell', },
+}
+vim.api.nvim_create_autocmd({ 'BufWritePost', }, {
+  callback = function()
+    lint.try_lint()
+  end,
+})
+
+-- JoosepAlviste/nvim-ts-context-commentstring
+-- numToStr/Comment.nvim
+require('Comment').setup {
+  pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+}
