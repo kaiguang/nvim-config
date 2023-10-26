@@ -89,12 +89,6 @@ vim.opt.tabstop = 2               -- Insert 2 spaces for a tab
 vim.opt.termguicolors = true      -- Set term GUI colors (most terminals support this)
 vim.opt.undofile = true           -- Enable persistent undo
 
--- Spell checker
--- vim.opt.spelllang = 'en_us,en_ca,cjk'
--- vim.opt.spellcapcheck = ''
--- vim.opt.spelloptions = 'camel'
--- vim.opt.spell = true
-
 -- Disable netrw to use nvim-tree
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
