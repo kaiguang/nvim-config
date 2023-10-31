@@ -16,7 +16,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
-  { 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
+  { 'rebelot/kanagawa.nvim', priority = 1000 },
   -- lua functions required by many other plugins
   { 'nvim-lua/plenary.nvim', },
   {
@@ -65,7 +65,7 @@ require('lazy').setup({
 
 -- ## Colorscheme
 
-vim.cmd.colorscheme 'catppuccin'
+vim.cmd.colorscheme 'kanagawa'
 
 -- ## Options
 
