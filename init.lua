@@ -17,6 +17,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   { 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
+  -- lua functions required by many other plugins
+  { 'nvim-lua/plenary.nvim', },
   {
     'folke/which-key.nvim',
     event = 'VeryLazy',
@@ -59,7 +61,6 @@ require('lazy').setup({
     end,
   },
   { 'numToStr/Comment.nvim', lazy = false, },
-  { 'mfussenegger/nvim-lint', },
 })
 
 -- ## Colorscheme
@@ -92,6 +93,12 @@ vim.opt.undofile = true           -- Enable persistent undo
 -- Disable netrw to use nvim-tree
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
+
+-- ## Spell checking `:help spell`
+vim.opt.spelllang = 'en_us,en_ca,cjk'
+vim.opt.spellcapcheck = ''
+vim.opt.spelloptions = 'camel'
+vim.opt.spell = true
 
 -- git-blame
 vim.g.gitblame_enabled = 0                      -- Disable on start-up
@@ -138,12 +145,12 @@ vim.diagnostic.config({
 -- vim.keymap.set('',  '<Space>r',        ':BufferLineCloseRight<Enter>')
 
 -- LSP
--- vim.keymap.set('n',  'gd',             vim.lsp.buf.definition)
--- vim.keymap.set('n',  'gr',             vim.lsp.buf.references)
--- vim.keymap.set('n',  'gh',             vim.lsp.buf.hover)
--- vim.keymap.set('n',  'ga',             vim.lsp.buf.code_action)
--- vim.keymap.set('n',  '<Space><Enter>', vim.lsp.buf.rename)
--- vim.keymap.set('n',  'go',             vim.diagnostic.open_float)
+vim.keymap.set('n',  'gd',             vim.lsp.buf.definition)
+vim.keymap.set('n',  'gr',             vim.lsp.buf.references)
+vim.keymap.set('n',  'gh',             vim.lsp.buf.hover)
+vim.keymap.set('n',  'ga',             vim.lsp.buf.code_action)
+vim.keymap.set('n',  'gr',             vim.lsp.buf.rename)
+vim.keymap.set('n',  'go',             vim.diagnostic.open_float)
 
 -- Diffview
 -- vim.keymap.set('',  '<Space>v',        ':DiffviewOpen<Enter>')
@@ -196,7 +203,6 @@ end)
 -- require "user.lualine"
 -- require "user.bufferline"
 -- require "user.lsp"
--- require "user.null-ls"
 -- require "user.cmp"
 -- require "user.luasnip"
 -- require "user.nvim-tree"
@@ -219,23 +225,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
--- nvim-lint
-local lint = require('lint')
-lint.linters_by_ft = {
-  gitcommit = { 'cspell', },
-  javascript = { 'cspell', },
-  markdown = { 'cspell', },
-  text = { 'cspell', },
-  typescript = { 'cspell', },
-}
-vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufWritePost', 'InsertLeave', }, {
-  callback = function()
-    lint.try_lint()
-  end,
-})
-
 -- JoosepAlviste/nvim-ts-context-commentstring
 -- numToStr/Comment.nvim
 require('Comment').setup {
   pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
 }
+
