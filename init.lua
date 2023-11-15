@@ -82,6 +82,7 @@ require('lazy').setup({
     end,
   },
   { 'sbdchd/neoformat' },
+  { 'nvim-telescope/telescope.nvim', tag = '0.1.4', },
 })
 
 -- Colorscheme
@@ -144,8 +145,10 @@ vim.keymap.set('n',  '<Space>t',        ':NvimTreeToggle<Enter>') -- nvim-tree/n
 vim.keymap.set('n',  '<Space>f',        ':Neoformat<Enter>') -- sbdchd/neoformat
 -- vim.keymap.set('',  '<Space>g',        ':GitBlameToggle<Enter>')
 
--- vim.keymap.set('',  '<Space>f',        ':Telescope find_files<Enter>')
--- vim.keymap.set('',  '<Space>/',        ':Telescope live_grep<Enter>')
+vim.keymap.set('',  '<Space>ff',        ':Telescope find_files<Enter>')
+vim.keymap.set('',  '<Space>fg',        ':Telescope live_grep<Enter>')
+vim.keymap.set('',  '<Space>fb',        ':Telescope buffers<Enter>')
+vim.keymap.set('',  '<Space>fh',        ':Telescope help_tags<Enter>')
 
 -- bufferline
 -- vim.keymap.set('',  '˙',               ':BufferLineCyclePrev<Enter>') -- <Opt-h>
