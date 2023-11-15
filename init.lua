@@ -83,6 +83,9 @@ require('lazy').setup({
   },
   { 'sbdchd/neoformat' },
   { 'nvim-telescope/telescope.nvim', tag = '0.1.4', },
+  -- LSP
+  { 'williamboman/mason.nvim', },
+  { 'neovim/nvim-lspconfig', },
 })
 
 -- Colorscheme
@@ -182,12 +185,6 @@ vim.keymap.set('', '<Space>z', function()
   vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 end)
 
--- Keymaps for treesitter incremental selection are defined in the treesitter.lua file.
--- init_selection = "<Down>",
--- node_incremental = "<Right>",
--- scope_incremental = "<Up>",
--- node_decremental = "<Left>",
-
 -- Clear search highlight when pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', ':nohls<Enter>')
 
@@ -226,7 +223,6 @@ end)
 -- ## Keymaps end
 
 -- TODO
--- require "user.telescope"
 -- require "user.lualine"
 -- require "user.bufferline"
 -- require "user.cmp"
@@ -243,4 +239,9 @@ vim.api.nvim_create_autocmd({'VimLeave'}, {
 require('Comment').setup {
   pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
 }
+
+-- LSP
+require('mason').setup()
+local lspconfig = require('lspconfig')
+lspconfig.tsserver.setup {}
 
