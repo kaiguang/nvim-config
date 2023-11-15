@@ -81,6 +81,7 @@ require('lazy').setup({
       require('nvim-tree').setup {}
     end,
   },
+  { 'sbdchd/neoformat' },
 })
 
 -- Colorscheme
@@ -140,7 +141,7 @@ vim.diagnostic.config({
 -- vim.keymap.set('',  '<C-l>',           '<C-w>l')
 
 vim.keymap.set('n',  '<Space>t',        ':NvimTreeToggle<Enter>') -- nvim-tree/nvim-tree
--- vim.keymap.set('',  '<Space>m',        ':Neoformat<Enter>')
+vim.keymap.set('n',  '<Space>f',        ':Neoformat<Enter>') -- sbdchd/neoformat
 -- vim.keymap.set('',  '<Space>g',        ':GitBlameToggle<Enter>')
 
 -- vim.keymap.set('',  '<Space>f',        ':Telescope find_files<Enter>')
