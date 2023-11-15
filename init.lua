@@ -1,8 +1,8 @@
--- TODO: replace with lazy.nvim completely
--- require "user.packer"
+-- Disable netrw to use nvim-tree/nvim-tree.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
--- ## Package manager
-
+-- Package manager
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
@@ -55,20 +55,38 @@ require('lazy').setup({
         },
         highlight = { enable = true },
         indent = { enable = true },  
+        incremental_selection = {
+          enable = true,
+          keymaps = {
+            init_selection = 'gnn',
+            node_incremental = 'grn',
+            scope_incremental = 'grc',
+            node_decremental = 'grm',
+          },
+        },
         -- JoosepAlviste/nvim-ts-context-commentstring
         context_commentstring = { enable = true, enable_autocmd = false, },
       })
     end,
   },
   { 'numToStr/Comment.nvim', lazy = false, },
+  {
+    'nvim-tree/nvim-tree.lua',
+    version = '*',
+    lazy = false,
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+    },
+    config = function()
+      require('nvim-tree').setup {}
+    end,
+  },
 })
 
--- ## Colorscheme
-
+-- Colorscheme
 vim.cmd.colorscheme 'kanagawa'
 
--- ## Options
-
+-- Options
 vim.opt.backup = false            -- Creates a backup file
 vim.opt.breakindent = true        -- Every wrapped line will continue visually indented (same amount of space as the beginning of that line).
 vim.opt.clipboard = 'unnamedplus' -- Allows neovim to access the system clipboard
@@ -78,11 +96,11 @@ vim.opt.ignorecase = true         -- Ignore case in search patterns
 vim.opt.linebreak = true          -- Companion to wrap, don't split words
 vim.opt.mouse = 'a'               -- Allow the mouse to be used in neovim
 vim.opt.number = true             -- Set numbered lines
-vim.opt.shiftwidth = 0            -- The number of spaces inserted for each indentation, when set to 0 it is the "tabstop" value
+vim.opt.shiftwidth = 0            -- The number of spaces inserted for each indentation, when set to 0 it is the 'tabstop' value
 vim.opt.showtabline = 2           -- Always show tabs
 vim.opt.smartcase = true          -- Smart case
 vim.opt.smartindent = true        -- Make indenting smarter again
-vim.opt.softtabstop = -1          -- When "softtabstop" is negative, the value of "shiftwidth" is used.
+vim.opt.softtabstop = -1          -- When 'softtabstop' is negative, the value of 'shiftwidth' is used.
 vim.opt.splitbelow = true         -- Force all horizontal splits to go below current window
 vim.opt.splitright = true         -- Force all vertical splits to go to the right of current window
 vim.opt.swapfile = false          -- Creates a swapfile
@@ -90,11 +108,7 @@ vim.opt.tabstop = 2               -- Insert 2 spaces for a tab
 vim.opt.termguicolors = true      -- Set term GUI colors (most terminals support this)
 vim.opt.undofile = true           -- Enable persistent undo
 
--- Disable netrw to use nvim-tree
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
-
--- ## Spell checking `:help spell`
+-- Spell checking `:help spell`
 vim.opt.spelllang = 'en_us,en_ca,cjk'
 vim.opt.spellcapcheck = ''
 vim.opt.spelloptions = 'camel'
@@ -119,15 +133,13 @@ vim.diagnostic.config({
   },
 })
 
--- ## Keymap
-
 -- Move cursor to other windows
 -- vim.keymap.set('',  '<C-h>',           '<C-w>h')
 -- vim.keymap.set('',  '<C-j>',           '<C-w>j')
 -- vim.keymap.set('',  '<C-k>',           '<C-w>k')
 -- vim.keymap.set('',  '<C-l>',           '<C-w>l')
 
--- vim.keymap.set('',  '<Space>t',        ':NvimTreeToggle<Enter>')
+vim.keymap.set('n',  '<Space>t',        ':NvimTreeToggle<Enter>') -- nvim-tree/nvim-tree
 -- vim.keymap.set('',  '<Space>m',        ':Neoformat<Enter>')
 -- vim.keymap.set('',  '<Space>g',        ':GitBlameToggle<Enter>')
 
@@ -160,12 +172,11 @@ vim.keymap.set('n',  '<Space>w',        ':w<Enter>',       { desc = 'write' })
 vim.keymap.set('n',  '<Space>wq',       ':wq<Enter>',      { desc = 'write & quit'})
 vim.keymap.set('n',  '<Space>q',        ':q<Enter>',       { desc = 'quit'})
 
--- Use treesitter to fold
---[[vim.keymap.set('', '<Space>z', function()
+-- Use nvim-treesitter/nvim-treesitter to fold
+vim.keymap.set('', '<Space>z', function()
   vim.opt.foldmethod = 'expr'
   vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 end)
---]]
 
 -- Keymaps for treesitter incremental selection are defined in the treesitter.lua file.
 -- init_selection = "<Down>",
@@ -175,6 +186,17 @@ end)
 
 -- Clear search highlight when pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', ':nohls<Enter>')
+
+-- Highlight on yank
+-- See `:help vim.highlight.on_yank()`
+local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_autocmd('TextYankPost', {
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+  group = highlight_group,
+  pattern = '*',
+})
 
 -- Bind p in visual mode to paste without overriding the current register
 vim.keymap.set('v', 'p', 'pgvy')
@@ -197,32 +219,19 @@ vim.keymap.set('n', 's', function()
 end)
 --]]
 
+-- ## Keymaps end
+
 -- TODO
 -- require "user.telescope"
--- require "user.treesitter"
 -- require "user.lualine"
 -- require "user.bufferline"
--- require "user.lsp"
 -- require "user.cmp"
 -- require "user.luasnip"
--- require "user.nvim-tree"
--- require "user.comment"
 
--- Set cursor to vertical when leaving vim
+-- Set cursor in terminal to vertical when leaving vim
 vim.api.nvim_create_autocmd({'VimLeave'}, {
   pattern = {'*'},
   command = 'set guicursor=a:ver100-blinkwait200-blinkon200-blinkoff200',
-})
-
--- Highlight on yank
--- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-  group = highlight_group,
-  pattern = '*',
 })
 
 -- JoosepAlviste/nvim-ts-context-commentstring
