@@ -149,7 +149,7 @@ vim.diagnostic.config({
 -- vim.keymap.set('',  '<C-l>',           '<C-w>l')
 
 vim.keymap.set('n',  '<Space>t',        ':NvimTreeToggle<Enter>') -- nvim-tree/nvim-tree
-vim.keymap.set('n',  '<Space>f',        ':Neoformat<Enter>') -- sbdchd/neoformat
+vim.keymap.set('n',  '<Space>fm',        ':Neoformat<Enter>') -- sbdchd/neoformat
 -- vim.keymap.set('',  '<Space>g',        ':GitBlameToggle<Enter>')
 
 vim.keymap.set('',  '<Space>ff',        ':Telescope find_files<Enter>')
@@ -172,7 +172,7 @@ vim.keymap.set('n',  'gd',             vim.lsp.buf.definition)
 vim.keymap.set('n',  'gr',             vim.lsp.buf.references)
 vim.keymap.set('n',  'gh',             vim.lsp.buf.hover)
 vim.keymap.set('n',  'ga',             vim.lsp.buf.code_action)
-vim.keymap.set('n',  'gr',             vim.lsp.buf.rename)
+vim.keymap.set('n',  '<F2>',           vim.lsp.buf.rename)
 vim.keymap.set('n',  'go',             vim.diagnostic.open_float)
 
 -- Diffview
@@ -184,10 +184,15 @@ vim.keymap.set('n',  '<Space>wq',       ':wq<Enter>',      { desc = 'write & qui
 vim.keymap.set('n',  '<Space>q',        ':q<Enter>',       { desc = 'quit'})
 
 -- Use nvim-treesitter/nvim-treesitter to fold
-vim.keymap.set('', '<Space>z', function()
-  vim.opt.foldmethod = 'expr'
-  vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
-end)
+vim.keymap.set(
+  'n',
+  '<Space>z',
+  function()
+    vim.opt.foldmethod = 'expr'
+    vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+  end,
+  { desc = 'use nvim-treesitter to fold',  }
+)
 
 -- Clear search highlight when pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', ':nohls<Enter>')
