@@ -158,16 +158,6 @@ vim.keymap.set('',  '<Space>fg',        ':Telescope live_grep<Enter>')
 vim.keymap.set('',  '<Space>fb',        ':Telescope buffers<Enter>')
 vim.keymap.set('',  '<Space>fh',        ':Telescope help_tags<Enter>')
 
--- bufferline
--- vim.keymap.set('',  '˙',               ':BufferLineCyclePrev<Enter>') -- <Opt-h>
--- vim.keymap.set('',  '¬',               ':BufferLineCycleNext<Enter>') -- <Opt-l>
--- vim.keymap.set('',  '≤',               ':BufferLineMovePrev<Enter>')  -- <Opt-,>
--- vim.keymap.set('',  '≥',               ':BufferLineMoveNext<Enter>')  -- <Opt-.>
--- vim.keymap.set('',  '<Space>p',        ':BufferLinePick<Enter>')
--- vim.keymap.set('',  '<Space>c',        ':BufferLinePickClose<Enter>')
--- vim.keymap.set('',  '<Space>l',        ':BufferLineCloseLeft<Enter>')
--- vim.keymap.set('',  '<Space>r',        ':BufferLineCloseRight<Enter>')
-
 -- LSP
 vim.keymap.set('n',  'gd',             vim.lsp.buf.definition)
 vim.keymap.set('n',  'gr',             vim.lsp.buf.references)
@@ -234,7 +224,6 @@ end)
 
 -- TODO
 -- require "user.lualine"
--- require "user.bufferline"
 -- require "user.cmp"
 -- require "user.luasnip"
 
