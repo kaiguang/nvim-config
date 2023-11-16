@@ -109,6 +109,7 @@ vim.opt.shiftwidth = 0            -- The number of spaces inserted for each inde
 vim.opt.showtabline = 2           -- Always show tabs
 vim.opt.smartcase = true          -- Smart case
 vim.opt.smartindent = true        -- Make indenting smarter again
+vim.opt.scrolloff = 999           -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.softtabstop = -1          -- When 'softtabstop' is negative, the value of 'shiftwidth' is used.
 vim.opt.splitbelow = true         -- Force all horizontal splits to go below current window
 vim.opt.splitright = true         -- Force all vertical splits to go to the right of current window
