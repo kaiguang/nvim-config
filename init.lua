@@ -109,13 +109,15 @@ vim.opt.shiftwidth = 0            -- The number of spaces inserted for each inde
 vim.opt.showtabline = 2           -- Always show tabs
 vim.opt.smartcase = true          -- Smart case
 vim.opt.smartindent = true        -- Make indenting smarter again
-vim.opt.scrolloff = 999           -- Minimal number of screen lines to keep above and below the cursor.
+-- vim.opt.scrolloff = 999           -- Minimal number of screen lines to keep above and below the cursor.
+vim.opt.sidescrolloff = 8         -- Minimal number of screen columns either side of cursor if wrap is `false`
 vim.opt.softtabstop = -1          -- When 'softtabstop' is negative, the value of 'shiftwidth' is used.
 vim.opt.splitbelow = true         -- Force all horizontal splits to go below current window
 vim.opt.splitright = true         -- Force all vertical splits to go to the right of current window
 vim.opt.swapfile = false          -- Creates a swapfile
 vim.opt.tabstop = 2               -- Insert 2 spaces for a tab
 vim.opt.termguicolors = true      -- Set term GUI colors (most terminals support this)
+vim.opt.wrap = false              -- Disable line wrap
 vim.opt.undofile = true           -- Enable persistent undo
 
 -- Spell checking `:help spell`
