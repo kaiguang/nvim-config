@@ -1,3 +1,5 @@
+Minimum Neovim Version: 0.9.4
+
 Clean Neovim config
 
 ```sh

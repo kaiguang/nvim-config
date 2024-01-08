@@ -31,9 +31,6 @@ require('lazy').setup({
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    dependencies = {
-      'JoosepAlviste/nvim-ts-context-commentstring',
-    },
     config = function () 
       local configs = require('nvim-treesitter.configs')
 
@@ -64,12 +61,11 @@ require('lazy').setup({
             node_decremental = 'grm',
           },
         },
-        -- JoosepAlviste/nvim-ts-context-commentstring
-        context_commentstring = { enable = true, enable_autocmd = false, },
       })
     end,
   },
   { 'numToStr/Comment.nvim', lazy = false, },
+  { 'JoosepAlviste/nvim-ts-context-commentstring' },
   {
     'nvim-tree/nvim-tree.lua',
     version = '*',
@@ -234,6 +230,12 @@ vim.api.nvim_create_autocmd({'VimLeave'}, {
   pattern = {'*'},
   command = 'set guicursor=a:ver100-blinkwait200-blinkon200-blinkoff200',
 })
+
+-- JoosepAlviste/nvim-ts-context-commentstring
+vim.g.skip_ts_context_commentstring_module = true -- Skip backwards compatibility routines and speed up loading
+require('ts_context_commentstring').setup {
+  enable_autocmd = false,
+}
 
 -- JoosepAlviste/nvim-ts-context-commentstring
 -- numToStr/Comment.nvim
