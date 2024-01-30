@@ -145,7 +145,7 @@ vim.keymap.set('n',  '<Space>t',        ':NvimTreeToggle<Enter>') -- nvim-tree/n
 vim.keymap.set('n',  '<Space>fm',        ':Neoformat<Enter>') -- sbdchd/neoformat
 -- vim.keymap.set('',  '<Space>g',        ':GitBlameToggle<Enter>')
 
-vim.keymap.set('',  '<Space>ff',        ':Telescope find_files<Enter>')
+vim.keymap.set('',  '<Space>ff',        ':Telescope find_files hidden=true<Enter>')
 vim.keymap.set('',  '<Space>fg',        ':Telescope live_grep<Enter>')
 vim.keymap.set('',  '<Space>fb',        ':Telescope buffers<Enter>')
 vim.keymap.set('',  '<Space>fh',        ':Telescope help_tags<Enter>')
