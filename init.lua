@@ -86,6 +86,8 @@ require('lazy').setup({
   -- LSP
   { 'williamboman/mason.nvim', },
   { 'neovim/nvim-lspconfig', },
+  -- Git
+  { 'lewis6991/gitsigns.nvim', },
 })
 
 -- Colorscheme
@@ -242,3 +244,6 @@ require('mason').setup()
 local lspconfig = require('lspconfig')
 lspconfig.tsserver.setup {}
 
+-- Git
+-- lewis6991/gitsigns.nvim
+require('gitsigns').setup()
