@@ -70,9 +70,6 @@ require('lazy').setup({
     'nvim-tree/nvim-tree.lua',
     version = '*',
     lazy = false,
-    dependencies = {
-      'nvim-tree/nvim-web-devicons',
-    },
     config = function()
       require('nvim-tree').setup {
         update_focused_file = {
@@ -88,6 +85,33 @@ require('lazy').setup({
         actions = {
           open_file = {
             quit_on_open = true,
+          },
+        },
+        renderer = {
+          icons = {
+            show = {
+              file = false,
+              folder = false,
+              folder_arrow = false,
+            },
+            glyphs = {
+              git = {
+                unstaged = 'U',
+                staged = 'S',
+                unmerged = "*",
+                renamed = "R",
+                untracked = "?",
+                deleted = "D",
+                ignored = "◌",
+              },
+            },
+            web_devicons = {
+              file = { enable = false, },
+              folder = { enable = false, },
+            },
+          },
+          indent_markers = {
+            enable = true,
           },
         },
       }
