@@ -100,6 +100,7 @@ require('lazy').setup({
   { 'neovim/nvim-lspconfig', },
   -- Git
   { 'lewis6991/gitsigns.nvim', },
+  { 'f-person/git-blame.nvim' },
 })
 
 -- Colorscheme
@@ -136,10 +137,6 @@ vim.opt.spellcapcheck = ''
 vim.opt.spelloptions = 'camel'
 vim.opt.spell = true
 
--- git-blame
-vim.g.gitblame_enabled = 0                      -- Disable on start-up
-vim.g.gitblame_date_format = '%Y-%m-%d %X (%a)' -- Custom date format
-
 -- Add icons to the signcolumn
 vim.fn.sign_define('DiagnosticSignError',  { text = '',  texthl = 'DiagnosticSignError',  numhl = 'DiagnosticSignError' })
 vim.fn.sign_define('DiagnosticSignWarn',   { text = '',  texthl = 'DiagnosticSignWarn',   numhl = 'DiagnosticSignWarn'  })
@@ -156,8 +153,8 @@ vim.diagnostic.config({
 })
 
 vim.keymap.set('n',  '<Space>t',        ':NvimTreeToggle<Enter>') -- nvim-tree/nvim-tree
-vim.keymap.set('n',  '<Space>fm',        ':Neoformat<Enter>') -- sbdchd/neoformat
--- vim.keymap.set('',  '<Space>g',        ':GitBlameToggle<Enter>')
+vim.keymap.set('n',  '<Space>fm',       ':Neoformat<Enter>') -- sbdchd/neoformat
+vim.keymap.set('',  '<Space>g',         ':GitBlameToggle<Enter>') -- f-person/git-blame.nvim
 
 vim.keymap.set('',  '<Space>ff',        ':Telescope find_files hidden=true<Enter>')
 vim.keymap.set('',  '<Space>fg',        ':Telescope live_grep<Enter>')
@@ -259,3 +256,8 @@ lspconfig.tsserver.setup {}
 -- Git
 -- lewis6991/gitsigns.nvim
 require('gitsigns').setup()
+-- f-person/git-blame.nvim
+require('gitblame').setup {
+  enabled = false,
+  date_format = '%Y-%m-%d %X (%a)',
+}
