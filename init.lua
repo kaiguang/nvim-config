@@ -78,6 +78,18 @@ require('lazy').setup({
         update_focused_file = {
           enable = true,
         },
+        view = {
+          width = 80,
+        },
+        filters = {
+          dotfiles = false,
+          git_ignored = false,
+        },
+        actions = {
+          open_file = {
+            quit_on_open = true,
+          },
+        },
       }
     end,
   },
