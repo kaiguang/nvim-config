@@ -16,6 +16,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
+  -- Colorscheme
   { 'rebelot/kanagawa.nvim', priority = 1000 },
   -- lua functions required by many other plugins
   { 'nvim-lua/plenary.nvim', },
@@ -128,7 +129,7 @@ require('lazy').setup({
 })
 
 -- Colorscheme
-vim.cmd.colorscheme 'kanagawa-lotus'
+vim.cmd.colorscheme 'kanagawa'
 
 -- Options
 vim.opt.backup = false            -- Creates a backup file
