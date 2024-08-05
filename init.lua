@@ -255,12 +255,6 @@ end)
 -- require "user.cmp"
 -- require "user.luasnip"
 
--- Set cursor in terminal to vertical when leaving vim
-vim.api.nvim_create_autocmd({'VimLeave'}, {
-  pattern = {'*'},
-  command = 'set guicursor=a:ver100-blinkwait200-blinkon200-blinkoff200',
-})
-
 -- JoosepAlviste/nvim-ts-context-commentstring
 vim.g.skip_ts_context_commentstring_module = true -- Skip backwards compatibility routines and speed up loading
 require('ts_context_commentstring').setup {
