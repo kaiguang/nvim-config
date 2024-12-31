@@ -270,7 +270,6 @@ require('Comment').setup {
 -- LSP
 require('mason').setup()
 local lspconfig = require('lspconfig')
-lspconfig.tsserver.setup {}
 
 -- Git
 -- lewis6991/gitsigns.nvim
