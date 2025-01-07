@@ -129,7 +129,7 @@ require('lazy').setup({
 })
 
 -- Colorscheme
-vim.cmd.colorscheme 'kanagawa-lotus'
+vim.cmd.colorscheme 'kanagawa'
 
 -- Options
 vim.opt.backup = false            -- Creates a backup file
